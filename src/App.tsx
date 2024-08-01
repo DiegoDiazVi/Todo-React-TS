@@ -22,9 +22,9 @@ const mockTodos = [
 function App(): JSX.Element {
   const [todos, setTodos] = useState(mockTodos)
   return (
-    <>
+    <div className='todoapp'>
       <Todos todos={todos} />
-    </>
+    </div>
   )
 }
 
