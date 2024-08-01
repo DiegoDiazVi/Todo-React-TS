@@ -1,5 +1,7 @@
 import { useState } from "react"
 import Todos from "./components/Todos.tsx"
+import type { TodoTitle, TodoId } from './types/types';
+
 
 const mockTodos = [
   {
@@ -22,13 +24,40 @@ const mockTodos = [
 function App(): JSX.Element {
   const [todos, setTodos] = useState(mockTodos)
 
-  const handlerRemoveTodo = (id: string): void => {
+  const handlerAddTodo = ({ title }: TodoTitle): void => {
+    const newTodo = {
+      id: String(todos.length + 1),
+      title,
+      completed: false,
+    }
+    setTodos(prevState => [...prevState, newTodo]);
+  }
+
+  const handlerRemoveTodo = ({ id }: TodoId): void => {
     setTodos(todos.filter(todo => todo.id !== id));
+  }
+
+  const handlerCompletedTodo = ({ id }: TodoId): void => {
+    const newTodos = todos.map( todo => {
+      if( todo.id ===id ) {
+        return {
+          ...todo,
+          completed: !todo.completed
+        }
+      }
+      return todo
+    })
+    setTodos(newTodos);
   }
 
   return (
     <div className='todoapp'>
-      <Todos todos={todos} onRemoveTodo={handlerRemoveTodo} />
+      <Todos
+        todos={todos}
+        onRemoveTodo={handlerRemoveTodo}
+        onAddTodo={handlerAddTodo}
+        onCompletedTodo={handlerCompletedTodo}
+      />
     </div>
   )
 }

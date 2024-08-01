@@ -1,21 +1,22 @@
-import type { Todo as TodoType } from '../types/types';
-
+import type { Todo as TodoType, TodoTitle, TodoId  } from '../types/types';
 interface TodoProps extends TodoType {
-    onRemoveTodo: (id: string) => void;
+    onRemoveTodo: ({ id }: TodoId) => void;
+    onAddTodo: ({ title }: TodoTitle) => void;
+    onCompletedTodo: ({ id }: TodoId) => void;
 }
 
 
-function Todo({ id, title, completed, onRemoveTodo }: TodoProps): JSX.Element {
+function Todo({ id, title, completed, onRemoveTodo, onAddTodo, onCompletedTodo }: TodoProps): JSX.Element {
     return (
         <div className="view">
             <input
                 className="toggle"
                 type="checkbox"
                 checked={completed}
-                onClick={() => console.log('clicked')}
+                onClick={() => onCompletedTodo({id})}
             />
             <label>{title}</label>
-            <button className="destroy" onClick={() => onRemoveTodo(id)}></button>
+            <button className="destroy" onClick={() => onRemoveTodo({id})}></button>
         </div>
     );
 }
