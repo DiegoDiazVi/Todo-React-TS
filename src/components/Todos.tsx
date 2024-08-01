@@ -1,16 +1,15 @@
-import type { Todo } from '../types/types';
-
+import type { Todo as TodoType } from '../types/types';
+import Todo from './Todo';
 interface TodosProps {
-    todos : Todo[];
+    todos : TodoType[];
 }
-
 
 function Todos({ todos }: TodosProps): JSX.Element {
     return (
-        <ul>
+        <ul className='todo-list'>
             {todos.map(todo => (
-                <li key={todo.id}>
-                    {todo.title}
+                <li key={todo.id} className={`${todo.completed ? 'completed': ''}`}>
+                    <Todo key={todo.id} id={todo.id} title={todo.title} completed={todo.completed}/>
                 </li>
             ))}
         </ul>
