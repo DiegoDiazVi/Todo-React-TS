@@ -1,8 +1,8 @@
-import type { Todo as TodoType, TodoTitle, TodoId  } from '../types/types';
+import type { Todo as TodoType, TodoTitle, TodoFunctionId  } from '../types/types';
 interface TodoProps extends TodoType {
-    onRemoveTodo: ({ id }: TodoId) => void;
+    onRemoveTodo: TodoFunctionId
     onAddTodo: ({ title }: TodoTitle) => void;
-    onCompletedTodo: ({ id }: TodoId) => void;
+    onCompletedTodo: TodoFunctionId
 }
 
 
