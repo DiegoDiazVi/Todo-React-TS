@@ -1,14 +1,16 @@
-import type { Todo as TodoType } from '../types/types';
+import Filters from './Filters';
 
 interface FooterProps {
-    todos: TodoType[];
+    completedTodo: number
+    activeCount: number,
+    onClearCompleted: () => void
 }
 
-function Footer({ todos, activeCount, onClearCompleted }: FooterProps): JSX.Element {
+function Footer({ completedTodo = 0, activeCount = 0, onClearCompleted }: FooterProps): JSX.Element {
     return (
         <footer className='footer'>
             <span className='todo-count'>
-                <strong>{todos.length}</strong> Tareas pendientes
+                <strong>{activeCount}</strong> Tareas pendientes
             </span>
             <Filters
                 filtersSelected={}
