@@ -1,4 +1,4 @@
-import { TODO_FILTERS } from '../constants';
+import { TODO_FILTERS } from '../constants/constants';
 export interface Todo {
     id: string;
     title: string;
