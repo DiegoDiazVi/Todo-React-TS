@@ -57,13 +57,24 @@ function App(): JSX.Element {
     setFilterSeletected(filter);
   }
 
+  const filteredTodos = todos.filter(todo => {
+    switch (filterSelected) {
+      case TODO_FILTERS.ACTIVE:
+        return !todo.completed
+      case TODO_FILTERS.COMPLETED:
+        return todo.completed
+      default:
+        return todo
+    }
+  })
+
   const activeCount: number = todos.filter(todo => todo.completed !== true).length
   const completedCount: number = todos.filter(todo => todo.completed === true).length
 
   return (
     <div className='todoapp'>
       <Todos
-        todos={todos}
+        todos={filteredTodos}
         onRemoveTodo={handlerRemoveTodo}
         onAddTodo={handlerAddTodo}
         onCompletedTodo={handlerCompletedTodo}
