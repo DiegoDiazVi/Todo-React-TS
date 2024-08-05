@@ -1,4 +1,4 @@
-import { FILTERS_BUTTONS } from "../constants";
+import { FILTERS_BUTTONS } from "../constants/constants";
 import type { FiltersValue } from "../types/types";
 
 interface FiltersProps {
