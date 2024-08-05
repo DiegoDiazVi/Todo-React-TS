@@ -1,20 +1,23 @@
+import type { FiltersValue } from '../types/types';
 import Filters from './Filters';
 
 interface FooterProps {
-    completedTodo: number
     activeCount: number,
-    onClearCompleted: () => void
+    completedTodo: number,
+    filterSelected: FiltersValue,
+    handlerFilterChange: (filter: FiltersValue) => void,
+    onClearCompleted: () => void,
 }
 
-function Footer({ completedTodo = 0, activeCount = 0, onClearCompleted }: FooterProps): JSX.Element {
+function Footer({ completedTodo = 0, activeCount = 0, filterSelected, onClearCompleted, handlerFilterChange }: FooterProps): JSX.Element {
     return (
         <footer className='footer'>
             <span className='todo-count'>
                 <strong>{activeCount}</strong> Tareas pendientes
             </span>
             <Filters
-                filtersSelected={}
-                onFilterChange={}
+                filtersSelected={filterSelected}
+                onFilterChange={handlerFilterChange}
             />
         </footer>
     );
