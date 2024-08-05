@@ -1,64 +1,43 @@
-import { useState } from "react"
+import { useReducer, useState } from "react"
 import Todos from "./components/Todos.tsx"
-import type { TodoTitle, TodoId, FiltersValue } from './types/types';
-import { TODO_FILTERS } from "./constants.ts";
 import Footer from "./components/Footer.tsx";
 import Header from "./components/Header.tsx";
 
-
-const mockTodos = [
-  {
-    id: '1',
-    title: 'Learn TypeScript',
-    completed: true,
-  },
-  {
-    id: '2',
-    title: 'Learn React',
-    completed: false,
-  },
-  {
-    id: '3',
-    title: 'Learn Node.js',
-    completed: false,
-  },
-]
+import type { TodoTitle, TodoId, FiltersValue } from './types/types';
+import { TODO_FILTERS } from "./constants/constants.ts";
+import { mockTodos } from "./mocks/todos.ts";
+import { taskReducer } from "./reducers/taskReducer.ts";
 
 function App(): JSX.Element {
-  const [todos, setTodos] = useState(mockTodos)
+  const [tasks, dispatch] = useReducer(taskReducer , mockTodos)
   const [filterSelected, setFilterSeletected] = useState<FiltersValue>(TODO_FILTERS.ALL);
 
   const handlerAddTodo = ({ title }: TodoTitle): void => {
-    const newTodo = {
-      id: String(todos.length + 1),
-      title,
-      completed: false,
-    }
-    setTodos(prevState => [...prevState, newTodo]);
+    dispatch({
+      type: 'ADD_TASK',
+      title: title
+    })
   }
 
   const handlerRemoveTodo = ({ id }: TodoId): void => {
-    setTodos(todos.filter(todo => todo.id !== id));
+    dispatch({
+      type: 'DELETE_TASK',
+      id: id
+    });
   }
 
   const handlerCompletedTodo = ({ id }: TodoId): void => {
-    const newTodos = todos.map( todo => {
-      if( todo.id ===id ) {
-        return {
-          ...todo,
-          completed: !todo.completed
-        }
-      }
-      return todo
+    dispatch({
+      type: 'COMPLETED_TASK',
+      id: id
     })
-    setTodos(newTodos);
   }
 
   const handlerFilterChange = (filter: FiltersValue): void => {
     setFilterSeletected(filter);
   }
 
-  const filteredTodos = todos.filter(todo => {
+  const filteredTodos = tasks.filter(todo => {
     switch (filterSelected) {
       case TODO_FILTERS.ACTIVE:
         return !todo.completed
@@ -69,12 +48,13 @@ function App(): JSX.Element {
     }
   })
 
-  const activeCount: number = todos.filter(todo => todo.completed !== true).length
-  const completedCount: number = todos.filter(todo => todo.completed === true).length
+  const activeCount: number = tasks.filter(task => task.completed !== true).length
+  const completedCount: number = tasks.filter(task => task.completed === true).length
 
   const handlerRemoveAllCompleted = (): void  => {
-    const newTodos = todos.filter(todo => !todo.completed);
-    setTodos(newTodos);
+    dispatch({
+      type: 'REMOVE_COMPLETED_TASKS',
+    })
   }
 
   return (
