@@ -8,8 +8,9 @@ interface FiltersProps {
 
 function Filters({ filtersSelected, onFilterChange }: FiltersProps): JSX.Element {
 
-    const handleClick = (filter: FiltersValue) => {
-        
+    const handleClick = (evt: React.MouseEvent<HTMLAnchorElement>, filter: FiltersValue) => {
+        evt.preventDefault();
+        onFilterChange(filter)
     }
 
     return (
@@ -24,7 +25,7 @@ function Filters({ filtersSelected, onFilterChange }: FiltersProps): JSX.Element
                             <a
                                 className={classSelected}
                                 href={href}
-                                onClick={handleClick(key)}
+                                onClick={(evt) => handleClick(evt, key as FiltersValue)}
                             >
                                 {literal}
                             </a>
