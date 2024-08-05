@@ -1,6 +1,8 @@
 import { useState } from "react"
 import Todos from "./components/Todos.tsx"
-import type { TodoTitle, TodoId } from './types/types';
+import type { TodoTitle, TodoId, FiltersValue } from './types/types';
+import { TODO_FILTERS } from "./constants.ts";
+import Footer from "./components/Footer.tsx";
 
 
 const mockTodos = [
@@ -23,6 +25,7 @@ const mockTodos = [
 
 function App(): JSX.Element {
   const [todos, setTodos] = useState(mockTodos)
+  const [filterSelected, setFilterSeletected] = useState<FiltersValue>(TODO_FILTERS.ALL);
 
   const handlerAddTodo = ({ title }: TodoTitle): void => {
     const newTodo = {
@@ -50,6 +53,13 @@ function App(): JSX.Element {
     setTodos(newTodos);
   }
 
+  const handlerFilterChange = (filter: FiltersValue): void => {
+    setFilterSeletected(filter);
+  }
+
+  const activeCount: number = todos.filter(todo => todo.completed !== true).length
+  const completedCount: number = todos.filter(todo => todo.completed === true).length
+
   return (
     <div className='todoapp'>
       <Todos
@@ -57,6 +67,13 @@ function App(): JSX.Element {
         onRemoveTodo={handlerRemoveTodo}
         onAddTodo={handlerAddTodo}
         onCompletedTodo={handlerCompletedTodo}
+      />
+      <Footer
+        completedTodo={completedCount}
+        activeCount={activeCount}
+        filterSelected={filterSelected}
+        handlerFilterChange={handlerFilterChange}
+        onClearCompleted={()=>{}}
       />
     </div>
   )
