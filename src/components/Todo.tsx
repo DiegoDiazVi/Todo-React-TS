@@ -1,12 +1,11 @@
-import type { Todo as TodoType, TodoTitle, TodoFunctionId  } from '../types/types';
+import type { Todo as TodoType, TodoFunctionId  } from '../types/types';
 interface TodoProps extends TodoType {
     onRemoveTodo: TodoFunctionId
-    onAddTodo: ({ title }: TodoTitle) => void;
     onCompletedTodo: TodoFunctionId
 }
 
 
-function Todo({ id, title, completed, onRemoveTodo, onAddTodo, onCompletedTodo }: TodoProps): JSX.Element {
+function Todo({ id, title, completed, onRemoveTodo, onCompletedTodo }: TodoProps): JSX.Element {
     return (
         <div className="view">
             <input
