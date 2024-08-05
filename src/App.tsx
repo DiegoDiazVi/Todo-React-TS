@@ -3,6 +3,7 @@ import Todos from "./components/Todos.tsx"
 import type { TodoTitle, TodoId, FiltersValue } from './types/types';
 import { TODO_FILTERS } from "./constants.ts";
 import Footer from "./components/Footer.tsx";
+import Header from "./components/Header.tsx";
 
 
 const mockTodos = [
@@ -78,10 +79,10 @@ function App(): JSX.Element {
 
   return (
     <div className='todoapp'>
+      <Header onAddTodo={handlerAddTodo}/>
       <Todos
         todos={filteredTodos}
         onRemoveTodo={handlerRemoveTodo}
-        onAddTodo={handlerAddTodo}
         onCompletedTodo={handlerCompletedTodo}
       />
       <Footer
