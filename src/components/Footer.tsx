@@ -19,6 +19,9 @@ function Footer({ completedTodo = 0, activeCount = 0, filterSelected, onClearCom
                 filtersSelected={filterSelected}
                 onFilterChange={handlerFilterChange}
             />
+            {
+                completedTodo > 0 && <button className='clear-completed' onClick={onClearCompleted}>Borrar Completados</button>
+            }
         </footer>
     );
 }
