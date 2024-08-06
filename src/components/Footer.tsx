@@ -17,11 +17,15 @@ function Footer({ completedTodo = 0, activeCount = 0, filterSelected, handlerFil
     }
     const { dispatch } = context;
 
-    const onClearCompleted = ():void => {
+    /**
+     * Clears all completed tasks.
+     */
+    const onClearCompleted = (): void => {
         dispatch({
             type: 'REMOVE_COMPLETED_TASKS',
-        })
-    }
+        });
+    };
+
     return (
         <footer className='footer'>
             <span className='todo-count'>

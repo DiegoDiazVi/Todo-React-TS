@@ -9,6 +9,10 @@ function Todo({ id, title, completed }: TodoProps): JSX.Element {
     }
     const { dispatch } = context;
 
+    /**
+     * Removes a todo item from the list.
+     * @param {TodoId} id - The ID of the todo item to be removed.
+     */
     const onRemoveTodo = ({id}: TodoId) => {
         dispatch({
             type: 'DELETE_TASK',
@@ -16,6 +20,11 @@ function Todo({ id, title, completed }: TodoProps): JSX.Element {
         });
     }
 
+    /**
+     * Handles the completion of a todo item.
+     *
+     * @param {TodoId} id - The ID of the todo item to be completed.
+     */
     const onCompletedTodo = ({id}: TodoId) => {
         dispatch({
             type: 'COMPLETED_TASK',

@@ -8,9 +8,15 @@ interface FiltersProps {
 
 function Filters({ filtersSelected, onFilterChange }: FiltersProps): JSX.Element {
 
+    /**
+     * Handles the click event on a filter anchor element.
+     *
+     * @param evt - The click event.
+     * @param filter - The filter value to be passed to the `onFilterChange` function.
+     */
     const handleClick = (evt: React.MouseEvent<HTMLAnchorElement>, filter: FiltersValue) => {
         evt.preventDefault();
-        onFilterChange(filter)
+        onFilterChange(filter);
     }
 
     return (

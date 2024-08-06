@@ -9,10 +9,19 @@ function CreateTodo(): JSX.Element {
     const { dispatch } = context;
     const [inputValue, setInputValue] = useState<string>('');
 
+    /**
+     * Handles the change event of the input element.
+     * @param evt - The change event object.
+     */
     const handlerChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
         setInputValue(evt.target.value)
     }
 
+    /**
+     * Handles the form submission event.
+     *
+     * @param event - The form submission event.
+     */
     const handlerSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
         dispatch({

@@ -1,7 +1,13 @@
 import { ACTION_TYPES } from "../constants/constants";
 import { Todo, ActionType } from "../types/types";
 
-
+/**
+ * Reducer function for managing the state of tasks in a Todo application.
+ * @param tasks - The array of tasks.
+ * @param action - The action object that describes the type of action and any additional data.
+ * @returns The updated array of tasks.
+ * @throws {Error} If the action type is not defined or if required data is missing.
+ */
 export function taskReducer(tasks: Todo[], action: ActionType): Todo[] {
     const { type, id, title } = action;
 
