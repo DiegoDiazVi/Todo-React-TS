@@ -20,3 +20,11 @@ export interface ActionType {
     id?: string;
     title?: string;
 }
+
+export interface FiltersType {
+    activeCount: number,
+    completedCount: number,
+    filteredTodos: Todo[],
+    handlerFilterChange: (filter: FiltersValue) => void,
+    filterSelected: FiltersValue
+}
