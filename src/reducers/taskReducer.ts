@@ -15,7 +15,7 @@ export function taskReducer(tasks: Todo[], action: ActionType): Todo[] {
         case ACTION_TYPES.ADD_TASK:
             if (!title) throw new Error('Title is required for ADD_TASK action');
             return [...tasks, {
-                id: String(tasks.length + 1),
+                id: crypto.randomUUID(),
                 title,
                 completed: false,
             }];
