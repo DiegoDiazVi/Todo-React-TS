@@ -1,12 +1,10 @@
 import { FILTERS_BUTTONS } from "../constants/constants";
+import useFilters from "../hooks/useFilters";
 import type { FiltersValue } from "../types/types";
 
-interface FiltersProps {
-    filtersSelected: FiltersValue;
-    onFilterChange: (filter: FiltersValue) => void;
-}
 
-function Filters({ filtersSelected, onFilterChange }: FiltersProps): JSX.Element {
+function Filters(): JSX.Element {
+    const { filterSelected, handlerFilterChange } = useFilters()
 
     /**
      * Handles the click event on a filter anchor element.
@@ -16,14 +14,14 @@ function Filters({ filtersSelected, onFilterChange }: FiltersProps): JSX.Element
      */
     const handleClick = (evt: React.MouseEvent<HTMLAnchorElement>, filter: FiltersValue) => {
         evt.preventDefault();
-        onFilterChange(filter);
+        handlerFilterChange(filter);
     }
 
     return (
         <ul className='filters'>
             {
                 Object.entries(FILTERS_BUTTONS).map(([key, { literal, href}]) => {
-                    const isSelected = filtersSelected === key;
+                    const isSelected = filterSelected === key;
                     const classSelected = isSelected ? 'selected' : '';
 
                     return (
