@@ -1,11 +1,6 @@
 import { ACTION_TYPES } from "../constants/constants";
-import { Todo } from "../types/types";
+import { Todo, ActionType } from "../types/types";
 
-interface ActionType {
-    type: typeof ACTION_TYPES[keyof typeof ACTION_TYPES];
-    id?: string;
-    title?: string;
-}
 
 export function taskReducer(tasks: Todo[], action: ActionType): Todo[] {
     const { type, id, title } = action;

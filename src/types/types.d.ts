@@ -14,3 +14,9 @@ export type FiltersValue = typeof TODO_FILTERS[keyof typeof TODO_FILTERS];
 export interface HeaderProps {
     onAddTodo: ({ title }: TodoTitle) => void
 }
+
+export interface ActionType {
+    type: typeof ACTION_TYPES[keyof typeof ACTION_TYPES];
+    id?: string;
+    title?: string;
+}
