@@ -1,16 +1,10 @@
 import { useContext } from 'react';
-import type { FiltersValue } from '../types/types';
 import Filters from './Filters';
 import { TaskContext } from '../context/TodoContext';
+import useFilters from '../hooks/useFilters';
 
-interface FooterProps {
-    activeCount: number,
-    completedTodo: number,
-    filterSelected: FiltersValue,
-    handlerFilterChange: (filter: FiltersValue) => void,
-}
-
-function Footer({ completedTodo = 0, activeCount = 0, filterSelected, handlerFilterChange }: FooterProps): JSX.Element {
+function Footer(): JSX.Element {
+    const { activeCount = 0, completedCount = 0 } = useFilters();
     const context = useContext(TaskContext);
     if (!context) {
         throw new Error('TaskContext debe ser usado dentro de un TodoProvider');
@@ -31,12 +25,9 @@ function Footer({ completedTodo = 0, activeCount = 0, filterSelected, handlerFil
             <span className='todo-count'>
                 <strong>{activeCount}</strong> Tareas pendientes
             </span>
-            <Filters
-                filtersSelected={filterSelected}
-                onFilterChange={handlerFilterChange}
-            />
+            <Filters />
             {
-                completedTodo > 0 && <button className='clear-completed' onClick={onClearCompleted}>Borrar Completados</button>
+                completedCount > 0 && <button className='clear-completed' onClick={onClearCompleted}>Borrar Completados</button>
             }
         </footer>
     );
