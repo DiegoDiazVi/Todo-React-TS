@@ -9,7 +9,7 @@ import { mockTodos } from "./mocks/todos.ts";
 import { taskReducer } from "./reducers/taskReducer.ts";
 
 function App(): JSX.Element {
-  const [tasks, dispatch] = useReducer(taskReducer , mockTodos)
+  const [tasks, dispatch] = useReducer(taskReducer , mockTodos);
   const [filterSelected, setFilterSeletected] = useState<FiltersValue>(TODO_FILTERS.ALL);
 
   const handlerAddTodo = ({ title }: TodoTitle): void => {
