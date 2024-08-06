@@ -1,7 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState, useMemo} from "react";
 import { TaskContext } from "../context/TodoContext";
 import { TODO_FILTERS } from "../constants/constants";
-import type { FiltersValue, FiltersType } from '../types/types';
+import type { FiltersValue, FiltersType, Todo } from '../types/types';
 
 function useFilters(): FiltersType {
     const context = useContext(TaskContext);
@@ -10,7 +10,22 @@ function useFilters(): FiltersType {
     }
 
     const { tasks } = context;
-    const [filterSelected, setFilterSeletected] = useState<FiltersValue>(TODO_FILTERS.ALL);
+    const [filterSelected, setFilterSelected] = useState<FiltersValue>(TODO_FILTERS.ALL);
+    const [filteredTodos, setFilteredTodos] = useState<Todo[]>(tasks);
+
+    useEffect(() => {
+        const newFilteredTodos = tasks.filter(todo => {
+            switch (filterSelected) {
+            case TODO_FILTERS.ACTIVE:
+                return !todo.completed
+            case TODO_FILTERS.COMPLETED:
+                return todo.completed
+            default:
+                return todo
+            }
+        })
+        setFilteredTodos(newFilteredTodos)
+    }, [filterSelected, tasks])
 
     /**
      * Handles the change of the filter value.
@@ -18,38 +33,25 @@ function useFilters(): FiltersType {
      * @param filter - The new filter value.
      */
     const handlerFilterChange = (filter: FiltersValue): void => {
-        setFilterSeletected(filter);
+        setFilterSelected(filter);
     }
 
-    /**
-     * Filters the tasks based on the selected filter.
-     *
-     * @returns {Array<Task>} The filtered tasks.
-     */
-    const filteredTodos = tasks.filter(todo => {
-        switch (filterSelected) {
-        case TODO_FILTERS.ACTIVE:
-            return !todo.completed
-        case TODO_FILTERS.COMPLETED:
-            return todo.completed
-        default:
-            return todo
-        }
-    })
+
+
 
     /**
      * The number of active tasks.
      *
      * @type {number}
      */
-    const activeCount: number = tasks.filter(task => task.completed !== true).length
+    const activeCount: number = useMemo(() => tasks.filter(task => task.completed !== true).length, [tasks]);
 
     /**
      * The number of completed tasks.
      *
      * @type {number}
      */
-    const completedCount: number = tasks.filter(task => task.completed === true).length
+    const completedCount: number = useMemo(() => tasks.filter(task => task.completed === true).length, [tasks])
 
     return { handlerFilterChange, filteredTodos, activeCount, completedCount, filterSelected }
 }
