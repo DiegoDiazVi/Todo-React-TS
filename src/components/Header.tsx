@@ -1,7 +1,6 @@
-import type { HeaderProps } from "../types/types";
 import CreateTodo from "./CreateTodo";
 
-function Header({ onAddTodo }: HeaderProps): JSX.Element {
+function Header(): JSX.Element {
     return (
         <header className='header'>
             <h1>Todo
@@ -11,7 +10,7 @@ function Header({ onAddTodo }: HeaderProps): JSX.Element {
                     alt="TypeScript logo"
                 />
             </h1>
-            <CreateTodo onAddTodo={onAddTodo}/>
+            <CreateTodo/>
         </header>
     );
 }

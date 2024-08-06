@@ -1,11 +1,28 @@
-import type { Todo as TodoType, TodoFunctionId  } from '../types/types';
-interface TodoProps extends TodoType {
-    onRemoveTodo: TodoFunctionId
-    onCompletedTodo: TodoFunctionId
-}
+import { useContext } from 'react';
+import { TaskContext } from '../context/TodoContext';
+import type { Todo as TodoProps,  TodoId  } from '../types/types';
 
+function Todo({ id, title, completed }: TodoProps): JSX.Element {
+    const context = useContext(TaskContext);
+    if (!context) {
+        throw new Error('TaskContext debe ser usado dentro de un TodoProvider');
+    }
+    const { dispatch } = context;
 
-function Todo({ id, title, completed, onRemoveTodo, onCompletedTodo }: TodoProps): JSX.Element {
+    const onRemoveTodo = ({id}: TodoId) => {
+        dispatch({
+            type: 'DELETE_TASK',
+            id: id
+        });
+    }
+
+    const onCompletedTodo = ({id}: TodoId) => {
+        dispatch({
+            type: 'COMPLETED_TASK',
+            id: id
+        })
+    }
+
     return (
         <div className="view">
             <input

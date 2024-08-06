@@ -1,8 +1,12 @@
-import { useState } from 'react';
-import type { HeaderProps } from '../types/types';
+import { useContext, useState } from 'react';
+import { TaskContext } from '../context/TodoContext';
 
-
-function CreateTodo({ onAddTodo }: HeaderProps): JSX.Element {
+function CreateTodo(): JSX.Element {
+    const context = useContext(TaskContext);
+    if (!context) {
+        throw new Error('TaskContext debe ser usado dentro de un TodoProvider');
+    }
+    const { dispatch } = context;
     const [inputValue, setInputValue] = useState<string>('');
 
     const handlerChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
@@ -11,7 +15,10 @@ function CreateTodo({ onAddTodo }: HeaderProps): JSX.Element {
 
     const handlerSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
-        onAddTodo({ title: inputValue });
+        dispatch({
+            type: 'ADD_TASK',
+            title: inputValue
+        })
         setInputValue('');
     }
 
