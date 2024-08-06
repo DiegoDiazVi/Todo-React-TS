@@ -1,14 +1,12 @@
+import useFilters from '../hooks/useFilters';
 import Todo from './Todo';
-import type { Todo as TodoType } from '../types/types';
 
-interface TodosProps {
-    todos : TodoType[];
-}
-
-function Todos({ todos }: TodosProps): JSX.Element {
+function Todos(): JSX.Element {
+    const { filteredTodos } = useFilters()
+    console.log(filteredTodos)
     return (
         <ul className='todo-list'>
-            {todos.map(todo => (
+            {filteredTodos.map(todo => (
                 <li key={todo.id} className={`${todo.completed ? 'completed': ''}`}>
                     <Todo
                         id={todo.id}
