@@ -1,15 +1,15 @@
-## Crear un TodoMVC con TypeScript
+## Create a TodoMVC with TypeScript
 
-- [x] Inicializar proyecto con Vite
-- [x] Añadir linter para TypeScript + React
-- [x] Añadir estilos del TodoMVC
-- [x] Listar todos los TODOs
-- [x] Poder borrar un TODO
-- [x] Marcar TODO como completado
-- [x] Añadir forma de filtrar TODOs (Footer)
-- [x] Mostrar número de TODOs pendientes (Footer)
-- [x] Añadir forma de borrar todos los TODOs completados
-- [x] Crear Header con input (Header)
-- [x] Crear un TODO (Header)
-- [x] Pasar a Reducer
+- [x] Initialize project with Vite
+- [x] Add linter for TypeScript + React
+- [x] Add TodoMVC styles
+- [x] List all TODOs
+- [x] Be able to delete a TODO
+- [x] Mark TODO as completed
+- [x] Add way to filter TODOs (Footer)
+- [x] Show number of pending TODOs (Footer)
+- [x] Add way to delete all completed TODOs
+- [x] Create Header with input (Header)
+- [x] Create a TODO (Header)
+- [x] Switch to Reducer
 
