@@ -38,7 +38,7 @@ function Todo({ id, title, completed }: TodoProps): JSX.Element {
                 className="toggle"
                 type="checkbox"
                 checked={completed}
-                onClick={() => onCompletedTodo({id})}
+                onChange={() => onCompletedTodo({id})}
             />
             <label>{title}</label>
             <button className="destroy" onClick={() => onRemoveTodo({id})}></button>
