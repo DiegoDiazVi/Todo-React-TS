@@ -5,7 +5,6 @@ import type { Todo, ActionType, FiltersValue } from '../types/types';
 import { TODO_FILTERS } from "../constants/constants";
 
 interface TaskContextType {
-    tasks: Todo[],
     dispatch: Dispatch<ActionType>,
     filteredTodos: Todo[],
     activeCount: number,
@@ -42,7 +41,7 @@ function TodoProvider({ children }: TodoProviderProps): JSX.Element {
     const completedCount = tasks.filter(todo => todo.completed).length
 
     return (
-        <TaskContext.Provider value={{tasks, dispatch, setFilterSelected, filteredTodos, filterSelected, activeCount, completedCount }}>
+        <TaskContext.Provider value={{ dispatch, setFilterSelected, filteredTodos, filterSelected, activeCount, completedCount }}>
             { children }
         </TaskContext.Provider>
     );
