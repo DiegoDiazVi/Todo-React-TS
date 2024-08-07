@@ -2,7 +2,11 @@ import { useContext } from "react";
 import { TaskContext } from "../context/TodoContext";
 import type { FiltersValue, FiltersType} from '../types/types';
 
-function useFilters(): FiltersType {
+interface FiltersFunctionType extends FiltersType {
+    handlerFilterChange: (filter: FiltersValue) => void,
+}
+
+function useFilters(): FiltersFunctionType {
     const context = useContext(TaskContext);
     if (!context) {
         throw new Error('TaskContext debe ser usado dentro de un TodoProvider');
