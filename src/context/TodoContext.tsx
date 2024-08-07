@@ -12,7 +12,7 @@ interface TodoProviderProps {
     children: ReactNode
 }
 
-export const TaskContext = createContext<TaskContextType|null>(null);
+export const TaskContext = createContext<TaskContextType | null>(null);
 
 function TodoProvider({ children }: TodoProviderProps): JSX.Element {
     const [tasks, dispatch] = useReducer(taskReducer , mockTodos);
