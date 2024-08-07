@@ -1,22 +1,18 @@
 import { createContext, ReactNode, useReducer, Dispatch, useState, useEffect } from "react";
 import { mockTodos } from "../mocks/todos";
 import { taskReducer } from "../reducers/taskReducer";
-import type { Todo, ActionType, FiltersValue } from '../types/types';
 import { TODO_FILTERS } from "../constants/constants";
+import type { Todo, ActionType, FiltersValue, FiltersType } from '../types/types';
 
-interface TaskContextType {
+interface TaskContextType  extends FiltersType{
     dispatch: Dispatch<ActionType>,
-    filteredTodos: Todo[],
-    activeCount: number,
-    completedCount: number,
-    filterSelected: FiltersValue;
     setFilterSelected: (filter: FiltersValue) => void;
 }
-
-export const TaskContext = createContext<TaskContextType|null>(null);
 interface TodoProviderProps {
     children: ReactNode
 }
+
+export const TaskContext = createContext<TaskContextType|null>(null);
 
 function TodoProvider({ children }: TodoProviderProps): JSX.Element {
     const [tasks, dispatch] = useReducer(taskReducer , mockTodos);
