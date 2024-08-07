@@ -2,8 +2,7 @@ import useFilters from '../hooks/useFilters';
 import Todo from './Todo';
 
 function Todos(): JSX.Element {
-    const { filteredTodos } = useFilters()
-    console.log(filteredTodos)
+    const { filteredTodos } = useFilters();
     return (
         <ul className='todo-list'>
             {filteredTodos.map(todo => (
